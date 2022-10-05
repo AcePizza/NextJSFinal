@@ -5,9 +5,19 @@ type Data = {
   name: string
 }
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
-  res.status(200).json({ name: 'John Doe' })
+
+const handler = (req: NextApiRequest,
+  res: NextApiResponse<Data>) => {
+
+  console.log('req :>> ', req.body);
+
+  if (req.body.username === "mor_2314") {
+    return res.status(200).json({ name: "This is a test" })
+  }
+
+  return (
+    res.status(200).json({ name: 'John Doe' })
+  )
 }
+
+export default handler
