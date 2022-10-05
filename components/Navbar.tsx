@@ -9,7 +9,7 @@ const Navbar = (props: Props) => {
       <div className="container-fluid">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link active" aria-current="page" href="#">
+            <a className="nav-link active" aria-current="page" href="/">
               {shopIcon}
             </a>
           </li>
@@ -28,13 +28,13 @@ const Navbar = (props: Props) => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">
+              <a className="nav-link active" aria-current="page" href="/">
                 Home
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                Features
+              <a className="nav-link" href="/mongodb">
+                MongoDB
               </a>
             </li>
             <li className="nav-item">
