@@ -8,7 +8,6 @@ const Navbar = (props: Props) => {
   const router = useRouter();
 
   const toggleActive = () => {
-    console.log(router.pathname);
     let setValue: string = "";
     if (router.pathname === "/") {
       setValue = "nav-link";
