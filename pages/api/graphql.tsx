@@ -64,13 +64,6 @@ export default async function handler(
   })(req, res);
 }
 
-type Server = {
-  typeDefs: Data;
-  resolvers: void;
-  playground: boolean;
-  plugins: void;
-};
-
 export const config = {
   api: {
     bodyParser: false,
