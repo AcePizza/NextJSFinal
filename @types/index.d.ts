@@ -6,6 +6,7 @@ declare global {
 
 
 type Props = {
+    getProducts: Data[]
     data: Data[];
 };
 
