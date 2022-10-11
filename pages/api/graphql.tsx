@@ -1,7 +1,8 @@
-import { gql, ApolloServer } from "apollo-server-micro";
+import { gql, ApolloServer, Config } from "apollo-server-micro";
 import { NextApiRequest, NextApiResponse } from "next";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 import clientPromise from "../../lib/mongodb";
+import { Data } from "../../@types";
 
 const typeDefs = gql`
   type Product {
@@ -16,7 +17,7 @@ const typeDefs = gql`
   }
 
   type Rating {
-    rate: Int
+    rate: Float
     count: Int
   }
 
@@ -48,7 +49,6 @@ const resolvers = {
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
-  playground: true,
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 });
 
@@ -63,6 +63,13 @@ export default async function handler(
     path: "/api/graphql",
   })(req, res);
 }
+
+type Server = {
+  typeDefs: Data;
+  resolvers: void;
+  playground: boolean;
+  plugins: void;
+};
 
 export const config = {
   api: {
