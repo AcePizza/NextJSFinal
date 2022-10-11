@@ -1,9 +1,6 @@
 import clientPromise from "../../lib/mongodb";
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-type Data = {
-
-}
 
 export default async (req: NextApiRequest,
     res: NextApiResponse<Data>) => {
