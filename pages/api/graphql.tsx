@@ -27,12 +27,28 @@ const typeDefs = gql`
 
   type Mutation {
     insertTest(testString: String, testNumber: Int): Test!
+    addToShoppingCart(
+      userId: String
+      productId: String
+      quantity: Int
+    ): ShoppingCart!
   }
 
   type Test {
     _id: ID
     testString: String
     testNumber: Int
+  }
+
+  type ShoppingCart {
+    _id: ID
+    userID: String
+    items: [Item]
+  }
+
+  type Item {
+    productId: String
+    quantity: Float
   }
 `;
 
@@ -57,7 +73,6 @@ const resolvers = {
 
   Mutation: {
     insertTest: async <X, Y extends Test>(parent: X, args: Y) => {
-      console.log("parent :>> ", parent);
       console.log("args :>> ", args);
       try {
         const client = await clientPromise;
@@ -76,6 +91,10 @@ const resolvers = {
       } catch (error) {
         console.error(error);
       }
+    },
+    addToShoppingCart: async <T,>(args: T) => {
+      console.log("args :>> ", args);
+      return "You have reached the end";
     },
   },
 };
