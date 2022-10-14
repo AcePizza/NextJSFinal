@@ -2,6 +2,7 @@ import React from "react";
 import client from "../apollo-client";
 import { gql } from "@apollo/client";
 import { Props } from "../@types";
+import GrapQLCard from "../components/GrapQLCard";
 
 export async function getServerSideProps() {
   const { data } = await client.query({
@@ -23,9 +24,8 @@ export async function getServerSideProps() {
       }
     `,
   });
-
   return {
-    props: { data },
+    props: data,
   };
 }
 
@@ -34,10 +34,21 @@ const apollogql = (props: Props) => {
     <div className="container">
       <h3>This is an Apollo fetch</h3>
       {props.getProducts &&
-        props.getProducts.map((element, index) => {
+        props.getProducts.map((product, index) => {
           return (
             <React.Fragment key={index}>
-              <p>{element.title}</p>
+              <GrapQLCard
+                id={product.id}
+                title={product.title}
+                price={product.price}
+                description={product.description}
+                category={product.category}
+                image={product.image}
+                rating={{
+                  rate: product.rating.rate,
+                  count: product.rating.count,
+                }}
+              />
             </React.Fragment>
           );
         })}
