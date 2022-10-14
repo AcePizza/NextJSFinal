@@ -3,6 +3,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 import clientPromise from "../../lib/mongodb";
 import { Data } from "../../@types";
+import { ObjectId } from "mongodb";
+
+type AddToShoppingCart = {
+  userId: string;
+  productId: string;
+  quantity: number;
+};
 
 const typeDefs = gql`
   type Product {
@@ -26,18 +33,11 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    insertTest(testString: String, testNumber: Int): Test!
     addToShoppingCart(
       userId: String
       productId: String
       quantity: Int
     ): ShoppingCart!
-  }
-
-  type Test {
-    _id: ID
-    testString: String
-    testNumber: Int
   }
 
   type ShoppingCart {
@@ -72,36 +72,46 @@ const resolvers = {
   },
 
   Mutation: {
-    insertTest: async <X, Y extends Test>(parent: X, args: Y) => {
+    addToShoppingCart: async <P, A extends AddToShoppingCart>(
+      parent: P,
+      args: A
+    ) => {
+      console.log("parent :>> ", parent);
       console.log("args :>> ", args);
-      try {
-        const client = await clientPromise;
-        const db = client.db("NEXTjsStore");
 
-        const insertSomething = await db.collection("Test").insertOne({
-          testString: args.testString,
-          testNumber: args.testNumber,
+      try {
+        const client = await clientPromise; // load client
+        const db = client.db("NEXTjsStore"); // connect to db
+
+        const addToDB = await db.collection("ShoppingCart").insertOne({
+          userID: args.userId,
+          items: {
+            productId: args.productId,
+            quantity: args.quantity,
+          },
         });
-        console.log("insertSomething :>> ", insertSomething.insertedId);
-        return {
-          _id: insertSomething.insertedId,
-          testString: args.testString,
-          testNumber: args.testNumber,
-        };
+        const objID = addToDB.insertedId.toString();
+
+        const getShoppingCart = await db
+          .collection("ShoppingCart")
+          .findOne({ _id: new ObjectId(objID) });
+
+        return (
+          getShoppingCart && {
+            _id: objID,
+            items: [
+              {
+                productId: getShoppingCart.items.productId,
+                quantity: getShoppingCart.items.quantity,
+              },
+            ],
+          }
+        );
       } catch (error) {
         console.error(error);
       }
     },
-    addToShoppingCart: async <T,>(args: T) => {
-      console.log("args :>> ", args);
-      return "You have reached the end";
-    },
   },
-};
-
-type Test = {
-  testString: string;
-  testNumber: number;
 };
 
 const apolloServer = new ApolloServer({
