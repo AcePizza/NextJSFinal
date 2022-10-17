@@ -2,7 +2,7 @@ import { gql, ApolloServer } from "apollo-server-micro";
 import { NextApiRequest, NextApiResponse } from "next";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 import clientPromise from "../../lib/mongodb";
-import { Data } from "../../@types";
+import { Product } from "../../@types";
 import { ObjectId } from "mongodb";
 
 type AddToShoppingCart = {
