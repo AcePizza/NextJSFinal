@@ -1,13 +1,16 @@
+import Link from "next/link";
 import React from "react";
-import { Data } from "../@types";
+import { Product } from "../@types";
 
-const GrapQLCard = (props: Data) => {
+const GrapQLCard = (props: Product) => {
   const getRandomPrice = () => {
     return 10.4;
     // const min = Math.ceil(1);
     // const max = Math.floor(100);
     // return Math.floor(Math.random() * (max - min));
   };
+
+  const handleDetailsButton = () => {};
 
   return (
     <>
@@ -52,9 +55,12 @@ const GrapQLCard = (props: Data) => {
                 </div>
                 <h6 className="text-success">Free shipping</h6>
                 <div className="d-flex flex-column mt-4">
-                  <button className="btn btn-primary btn-sm" type="button">
-                    Details
-                  </button>
+                  <Link href={"/graphql/" + props.id} key={props.id} passHref>
+                    <button className="btn btn-primary btn-sm" type="button">
+                      Details
+                    </button>
+                  </Link>
+
                   <button
                     className="btn btn-outline-primary btn-sm mt-2"
                     type="button"

@@ -61,7 +61,7 @@ const Navbar = (props: Props) => {
               </a>
             </li>
             <li className="nav-item">
-              <a className={toggleActive()} href="/apollogql">
+              <a className={toggleActive()} href="/graphql">
                 GraphQL
               </a>
             </li>

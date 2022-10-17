@@ -1,9 +1,10 @@
 import clientPromise from "../../lib/mongodb";
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { Product } from "../../@types";
 
 
 export default async (req: NextApiRequest,
-    res: NextApiResponse<Data>) => {
+    res: NextApiResponse<Product>) => {
     try {
         const client = await clientPromise;
         const db = client.db("NEXTjsStore");

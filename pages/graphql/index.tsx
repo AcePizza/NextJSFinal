@@ -1,8 +1,8 @@
 import React from "react";
-import client from "../apollo-client";
+import client from "../../utils/apollo-client";
 import { gql } from "@apollo/client";
-import { Props } from "../@types";
-import GrapQLCard from "../components/GrapQLCard";
+import { Props } from "../../@types";
+import GrapQLCard from "../../components/GrapQLCard";
 
 export async function getServerSideProps() {
   const { data } = await client.query({
