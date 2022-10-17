@@ -3,9 +3,10 @@ import { Data } from "../@types";
 
 const GrapQLCard = (props: Data) => {
   const getRandomPrice = () => {
-    const min = Math.ceil(1);
-    const max = Math.floor(100);
-    return Math.floor(Math.random() * (max - min));
+    return 10.4;
+    // const min = Math.ceil(1);
+    // const max = Math.floor(100);
+    // return Math.floor(Math.random() * (max - min));
   };
 
   return (
