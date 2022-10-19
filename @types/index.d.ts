@@ -24,3 +24,14 @@ type Product = {
         count: number;
     };
 };
+
+type ShoppingCart = {
+    _id: string;
+    userID: string;
+    items: [ShoppingCartItems];
+};
+
+type ShoppingCartItems = {
+    quantity: number;
+    productId: string;
+}
