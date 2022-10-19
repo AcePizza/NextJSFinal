@@ -5,9 +5,10 @@ import { Product, Products } from "../@types";
 const GrapQLCard = (props: Product) => {
   const getRandomPrice = () => {
     return 10.4;
-    // const min = Math.ceil(1);
-    // const max = Math.floor(100);
-    // return Math.floor(Math.random() * (max - min));
+    // Return!!
+    const min = Math.ceil(1);
+    const max = Math.floor(100);
+    return Math.floor(Math.random() * (max - min));
   };
 
   const handleDetailsButton = () => {};
@@ -60,13 +61,6 @@ const GrapQLCard = (props: Product) => {
                       Details
                     </button>
                   </Link>
-
-                  <button
-                    className="btn btn-outline-primary btn-sm mt-2"
-                    type="button"
-                  >
-                    Add to wishlist
-                  </button>
                 </div>
               </div>
             </div>
