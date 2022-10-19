@@ -31,6 +31,7 @@ const typeDefs = gql`
   type Query {
     getProducts(id: Int): [Product]
     getProduct(id: Int): Product
+    getAllShoppingCartItems: [ShoppingCart]
   }
 
   type Mutation {
@@ -44,7 +45,7 @@ const typeDefs = gql`
   type ShoppingCart {
     _id: ID
     userID: String
-    items: [Item]
+    items: Item
   }
 
   type Item {
@@ -80,7 +81,6 @@ const resolvers = {
             .collection("Products")
             .findOne({ id: args.id });
 
-          console.log("products", products);
           return products;
         } catch (e) {
           console.error(e);
@@ -96,7 +96,20 @@ const resolvers = {
           console.error(e);
         }
       }
-      return "something";
+    },
+    getAllShoppingCartItems: async () => {
+      try {
+        const client = await clientPromise;
+        const db = client.db("NEXTjsStore");
+
+        const shoppingCartItems = await db
+          .collection("ShoppingCart")
+          .find({})
+          .toArray();
+        return shoppingCartItems;
+      } catch (error) {
+        console.warn(error);
+      }
     },
   },
 
@@ -125,17 +138,7 @@ const resolvers = {
           .collection("ShoppingCart")
           .findOne({ _id: new ObjectId(objID) });
 
-        return (
-          getShoppingCart && {
-            _id: objID,
-            items: [
-              {
-                productId: getShoppingCart.items.productId,
-                quantity: getShoppingCart.items.quantity,
-              },
-            ],
-          }
-        );
+        return getShoppingCart;
       } catch (error) {
         console.error(error);
       }
