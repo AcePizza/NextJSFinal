@@ -14,27 +14,7 @@ export const getServerSideProps = async (props: Props) => {
 const mongodb = (props: Props) => {
   return (
     <div className="container">
-      <h4>MongoDB data rendered below:</h4>
-
-      {props.data &&
-        props.data.map((product, index) => {
-          return (
-            <React.Fragment key={index}>
-              <MongoCard
-                id={product.id}
-                title={product.title}
-                price={product.price}
-                description={product.description}
-                category={product.category}
-                image={product.image}
-                rating={{
-                  rate: product.rating.rate,
-                  count: product.rating.count,
-                }}
-              />
-            </React.Fragment>
-          );
-        })}
+      <h4>MongoDB status page</h4>
     </div>
   );
 };
