@@ -10,6 +10,8 @@ type Props = {
     data: Data[];
 };
 
+type Products = Product[];
+
 type Product = {
     id: number;
     title: string;
