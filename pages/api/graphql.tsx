@@ -2,7 +2,7 @@ import { gql, ApolloServer } from "apollo-server-micro";
 import { NextApiRequest, NextApiResponse } from "next";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 import clientPromise from "../../lib/mongodb";
-import { Product } from "../../@types";
+import { Product, Products } from "../../@types";
 import { ObjectId } from "mongodb";
 
 type AddToShoppingCart = {
@@ -29,7 +29,8 @@ const typeDefs = gql`
   }
 
   type Query {
-    getProducts: [Product]
+    getProducts(id: Int): [Product]
+    getProduct(id: Int): Product
   }
 
   type Mutation {
@@ -54,20 +55,48 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    getProducts: async () => {
+    getProducts: async <P, A extends Product>(parent: P, args: A) => {
+      console.log("parent :>> ", parent);
+      console.log("args :>> ", args);
+
       try {
         const client = await clientPromise;
         const db = client.db("NEXTjsStore");
 
-        const products = await db
-          .collection("Products")
-          .find({})
-          .limit(20)
-          .toArray();
+        const products = await db.collection("Products").find({}).toArray();
         return products;
       } catch (e) {
         console.error(e);
       }
+    },
+    getProduct: async <P, A extends Product>(parent: P, args: A) => {
+      console.log("args", args);
+      if (args.id) {
+        try {
+          const client = await clientPromise;
+          const db = client.db("NEXTjsStore");
+
+          const products = await db
+            .collection("Products")
+            .findOne({ id: args.id });
+
+          console.log("products", products);
+          return products;
+        } catch (e) {
+          console.error(e);
+        }
+      } else {
+        try {
+          const client = await clientPromise;
+          const db = client.db("NEXTjsStore");
+
+          const products = await db.collection("Products").find({}).toArray();
+          return products;
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      return "something";
     },
   },
 
