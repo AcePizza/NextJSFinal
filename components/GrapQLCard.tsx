@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { Product } from "../@types";
+import { Product, Products } from "../@types";
 
 const GrapQLCard = (props: Product) => {
   const getRandomPrice = () => {
