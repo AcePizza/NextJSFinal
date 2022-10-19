@@ -65,6 +65,11 @@ const Navbar = (props: Props) => {
                 GraphQL
               </a>
             </li>
+            <li className="nav-item">
+              <a className={toggleActive()} href="/shoppingcart">
+                ShoppingCart
+              </a>
+            </li>
           </ul>
         </div>
       </div>
