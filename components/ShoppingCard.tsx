@@ -2,10 +2,6 @@ import React, { useEffect, useState } from "react";
 import { ShoppingCart } from "../@types";
 import { minusIcon, plusIcon, trashIcon } from "../utils/bootstrapIcons";
 
-export const getServerSideProps = (props: ShoppingCart) => {
-  console.log("context :>> ", props);
-};
-
 const ShoppingCard = (props: ShoppingCart) => {
   console.log("props", props);
   const [amount, setAmount] = useState(1);
