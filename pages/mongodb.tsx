@@ -11,10 +11,49 @@ export const getServerSideProps = async (props: Props) => {
   return { props: { data } };
 };
 
+type StatusAlert = {
+  status?: string;
+  text?: string;
+};
+
 const mongodb = (props: Props) => {
+  const statusAlert = <Status, Text>(status?: Status, text?: Text) => {
+    switch (status) {
+      case "success":
+        return (
+          <div className="alert alert-success">
+            <strong>Success!</strong> {`${text} is working as expected`}
+          </div>
+        );
+      case "warning":
+        return (
+          <div className="alert alert-warning">
+            <strong>Warning!</strong>
+            {`${text} might need
+            attention.`}
+          </div>
+        );
+      case "danger":
+        return (
+          <div className="alert alert-danger">
+            <strong>Danger!</strong> Indicates a dangerous or potentially
+            negative action.
+          </div>
+        );
+    }
+  };
+
   return (
     <div className="container">
       <h4>MongoDB status page</h4>
+      <div className="container text-center">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+          <div className="col">{statusAlert("success")}</div>
+          <div className="col">{statusAlert("success")}</div>
+          <div className="col">{statusAlert("success")}</div>
+          <div className="col">{statusAlert("success")}</div>
+        </div>
+      </div>
     </div>
   );
 };
