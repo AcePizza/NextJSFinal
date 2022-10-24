@@ -37,7 +37,7 @@ const typeDefs = gql`
   type Mutation {
     addToShoppingCart(
       userId: String
-      productId: String
+      productId: Int
       quantity: Int
     ): ShoppingCart!
   }

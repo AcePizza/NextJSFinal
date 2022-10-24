@@ -10,6 +10,7 @@ import { Product } from "../../@types";
 import client from "../../utils/apollo-client";
 import styles from "../../styles/ProductDetails.module.css";
 import Link from "next/link";
+import UpdateShoppingCart from "../../components/UpdateShoppingCart";
 
 export const RouteParams = () => {
   const route = useRouter();
@@ -101,9 +102,18 @@ const Details = (props: Product) => {
                 </div>
                 <h6 className="text-success">Free shipping</h6>
                 <div className="d-flex flex-column mt-4">
-                  <button className="btn btn-warning btn-sm" type="button">
-                    Buy now
-                  </button>
+                  <UpdateShoppingCart
+                    id={props.id}
+                    title={props.title}
+                    price={props.price}
+                    description={props.description}
+                    category={props.category}
+                    image={props.image}
+                    rating={{
+                      rate: props.rating.rate,
+                      count: props.rating.count,
+                    }}
+                  />
 
                   <button
                     className="btn btn-outline-primary btn-sm mt-2"
