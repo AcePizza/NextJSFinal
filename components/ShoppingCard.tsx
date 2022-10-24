@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { ShoppingCart } from "../@types";
+import { ShopCartPage, ShoppingCart, ShoppingCartProps } from "../@types";
 import { minusIcon, plusIcon, trashIcon } from "../utils/bootstrapIcons";
 
-const ShoppingCard = (props: ShoppingCart) => {
-  console.log("props", props);
-  const [amount, setAmount] = useState(1);
+const ShoppingCard = (props: ShoppingCartProps) => {
+  const [amount, setAmount] = useState(props.ShoppingCartItems.items.quantity);
 
   const modifyAmount = () => {
     if (amount > 1) {
       setAmount(1);
     }
   };
+  const shopptingCartItems = props.Products.find((item) => {
+    return item.id === props.ShoppingCartItems.items.productId;
+  });
 
   return (
     <React.Fragment>
@@ -19,13 +21,13 @@ const ShoppingCard = (props: ShoppingCart) => {
           <div className="row d-flex justify-content-between align-items-center">
             <div className="col-md-2 col-lg-2 col-xl-2">
               <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                src={shopptingCartItems.image}
                 className="img-fluid rounded-3"
-                alt="Cotton T-shirt"
+                alt={shopptingCartItems.title}
               />
             </div>
             <div className="col-md-3 col-lg-3 col-xl-3">
-              <p className="lead fw-normal mb-2">Basic T-shirt</p>
+              <p className="lead fw-normal mb-2">{shopptingCartItems.title}</p>
               <p>
                 <span className="text-muted">Size: </span>M{" "}
                 <span className="text-muted">Color: </span>Grey
@@ -53,7 +55,7 @@ const ShoppingCard = (props: ShoppingCart) => {
               </button>
             </div>
             <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-              <h5 className="mb-0">$499.00</h5>
+              <h5 className="mb-0">${shopptingCartItems.price}</h5>
             </div>
             <div className="col-md-1 col-lg-1 col-xl-1 text-end">
               <a href="#!" className="text-danger">

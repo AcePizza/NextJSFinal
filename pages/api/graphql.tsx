@@ -49,7 +49,7 @@ const typeDefs = gql`
   }
 
   type Item {
-    productId: String
+    productId: Int
     quantity: Float
   }
 `;

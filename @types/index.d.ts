@@ -35,3 +35,15 @@ type ShoppingCartItems = {
     quantity: number;
     productId: string;
 }
+
+type ShoppingCartMap = [ShoppingCart]
+
+type ShopCartPage = {
+    getAllShoppingCartItems: ShoppingCartMap;
+    getProducts: { id: number; image: string; title: string; price: number };
+};
+
+type ShoppingCartProps = {
+    ShoppingCartItems: ShoppingCart;
+    Products: { id: number; image: string; title: string; price: number };
+};
