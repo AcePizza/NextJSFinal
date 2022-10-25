@@ -1,7 +1,7 @@
 import Head from "next/head";
 import clientPromise from "../lib/mongodb";
 import { InferGetServerSidePropsType } from "next";
-import { Props, Data } from "../@types";
+import { Props } from "../@types";
 import React from "react";
 import MongoCard from "../components/MongoCard";
 

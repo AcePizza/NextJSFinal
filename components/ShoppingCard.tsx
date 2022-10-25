@@ -1,16 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { ShopCartPage, ShoppingCart, ShoppingCartProps } from "../@types";
+import {
+  Product,
+  ShopCartPage,
+  ShoppingCart,
+  ShoppingCartProps,
+} from "../@types";
 import { minusIcon, plusIcon, trashIcon } from "../utils/bootstrapIcons";
+
+type Prod = {
+  products: {
+    products: { id: number; title: string; price: number; image: string };
+  };
+};
+
+type Cart = {
+  shoppingCart: {
+    _id: string;
+    userID: string;
+    items: [{ quantity: number; productId: string }];
+  };
+};
 
 const ShoppingCard = (props: ShoppingCartProps) => {
   const [amount, setAmount] = useState(props.ShoppingCartItems.items.quantity);
+  const { products }: Prod = props.Products;
+  const { shoppingCart }: Cart = props.ShoppingCartItems;
 
-  const modifyAmount = () => {
-    if (amount > 1) {
-      setAmount(1);
-    }
-  };
-  const shopptingCartItems = props.Products.find((item) => {
+  const shopptingCartItems = products.find((item: Product) => {
     return item.id === props.ShoppingCartItems.items.productId;
   });
 

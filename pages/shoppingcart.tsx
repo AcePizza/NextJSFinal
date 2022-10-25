@@ -1,6 +1,6 @@
 import { enableExperimentalFragmentVariables, gql } from "@apollo/client";
 import React, { useState } from "react";
-import { ShopCartPage, ShoppingCart } from "../@types";
+import { Product, Products, ShopCartPage, ShoppingCart } from "../@types";
 import ShoppingCard from "../components/ShoppingCard";
 import client from "../utils/apollo-client";
 
@@ -37,14 +37,14 @@ const shoppingcart = (props: ShopCartPage) => {
     const arr2 = props.getAllShoppingCartItems.map(
       (element) => element.items.productId
     );
-    const filter2 = props.getProducts.filter((element) =>
+    const filter2 = props.getProducts.filter((element: Product) =>
       arr2.includes(element.id)
     );
     const price = filter2
-      .map((element) => {
+      .map((element: Product) => {
         return element.price;
       })
-      .reduce((a, b) => a + b, 0);
+      .reduce((a: number, b: number) => a + b, 0);
     return price;
   };
 
