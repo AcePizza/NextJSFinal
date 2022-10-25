@@ -1,22 +1,24 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
+import clientPromise from '../../lib/mongodb'
 
 type Data = {
   name: string
 }
 
 
-const handler = (req: NextApiRequest,
+const handler = async (req: NextApiRequest,
   res: NextApiResponse<Data>) => {
 
-  console.log('req :>> ', req.body);
+  const client = await clientPromise
+  const db = client.db('')
 
-  if (req.body.username === "mor_2314") {
-    return res.status(200).json({ name: "This is a test" })
-  }
+
+
+
 
   return (
-    res.status(200).json({ name: 'John Doe' })
+    res.status(200).json({ name: "Some" })
   )
 }
 

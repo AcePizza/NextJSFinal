@@ -6,9 +6,10 @@ import React from "react";
 import MongoCard from "../components/MongoCard";
 
 export const getServerSideProps = async (props: Props) => {
-  const res = await fetch("http://localhost:3000/api/products");
-  const data: Data = await res.json();
-  return { props: { data } };
+  const data = await fetch("http://localhost:3000/api/hello");
+  const res = await data.json();
+
+  return { props: { res } };
 };
 
 type StatusAlert = {
@@ -17,6 +18,7 @@ type StatusAlert = {
 };
 
 const mongodb = (props: Props) => {
+  console.log("props :>> ", props);
   const statusAlert = <Status, Text>(status?: Status, text?: Text) => {
     switch (status) {
       case "success":
