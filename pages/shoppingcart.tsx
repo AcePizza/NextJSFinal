@@ -1,6 +1,12 @@
 import { enableExperimentalFragmentVariables, gql } from "@apollo/client";
 import React, { useState } from "react";
-import { Product, Products, ShopCartPage, ShoppingCart } from "../@types";
+import {
+  Product,
+  Products,
+  ShopCartPage,
+  ShoppingCart,
+  ShoppingCartItems,
+} from "../@types";
 import ShoppingCard from "../components/ShoppingCard";
 import client from "../utils/apollo-client";
 
@@ -31,8 +37,6 @@ export const getServerSideProps = async (props: ShopCartPage) => {
 };
 
 const shoppingcart = (props: ShopCartPage) => {
-  // console.log("props :>> ", props.getAllShoppingCartItems[0].items.productId);
-
   const getPrice = () => {
     const arr2 = props.getAllShoppingCartItems.map(
       (element) => element.items.productId
