@@ -31,39 +31,22 @@ export const getServerSideProps = async (props: ShopCartPage) => {
 };
 
 const shoppingcart = (props: ShopCartPage) => {
-  console.log("props :>> ", props.getAllShoppingCartItems[0].items.productId);
+  // console.log("props :>> ", props.getAllShoppingCartItems[0].items.productId);
 
-  let arr1 = [];
-  let filter1 = [];
-
-  props.getAllShoppingCartItems.map((element) => {
-    arr1.push(element.items.productId);
-  });
-
-  const arr2 = props.getAllShoppingCartItems.map((element) => {
-    return element.items.productId;
-  });
-
-  const filter2 = props.getProducts.map((element) => {
-    return arr2.includes(element.id);
-  });
-
-  props.getProducts.map((element) => {
-    // console.log("element", element.id);
-    if (arr1.includes(element.id)) {
-      filter1.push(element);
-    }
-  });
-
-  console.log("arr1", arr1);
-  console.log("arr2 :>> ", arr2);
-  console.log("filter1 :>> ", filter2);
-
-  // const test = props.getProducts.filter((item) => {
-  //   return !props.getAllShoppingCartItems.items.productId.includes(item.id);
-  // });
-
-  // console.log("test", test);
+  const getPrice = () => {
+    const arr2 = props.getAllShoppingCartItems.map(
+      (element) => element.items.productId
+    );
+    const filter2 = props.getProducts.filter((element) =>
+      arr2.includes(element.id)
+    );
+    const price = filter2
+      .map((element) => {
+        return element.price;
+      })
+      .reduce((a, b) => a + b, 0);
+    return price;
+  };
 
   return (
     <div className="container h-100 py-5">
@@ -89,7 +72,7 @@ const shoppingcart = (props: ShopCartPage) => {
 
           <div className="card mb-4">
             <div className="card-body p-4 d-flex flex-row">
-              <p>Price total:</p>
+              <p>Price total: {getPrice()}</p>
             </div>
           </div>
 
