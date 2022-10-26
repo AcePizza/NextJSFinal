@@ -6,6 +6,7 @@ import {
   ShoppingCartProps,
 } from "../@types";
 import { minusIcon, plusIcon, trashIcon } from "../utils/bootstrapIcons";
+import DeleteButton from "./DeleteButton";
 
 type Prod = {
   products: {
@@ -72,9 +73,7 @@ const ShoppingCard = (props: ShoppingCartProps) => {
               <h5 className="mb-0">${shopptingCartItems.price}</h5>
             </div>
             <div className="col-md-1 col-lg-1 col-xl-1 text-end">
-              <a href="#!" className="text-danger">
-                {trashIcon}
-              </a>
+              <DeleteButton />
             </div>
           </div>
         </div>
