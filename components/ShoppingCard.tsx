@@ -23,10 +23,8 @@ type Cart = {
 
 const ShoppingCard = (props: ShoppingCartProps) => {
   const [amount, setAmount] = useState(props.ShoppingCartItems.items.quantity);
-  const { products }: Prod = props.Products;
-  const { shoppingCart }: Cart = props.ShoppingCartItems;
 
-  const shopptingCartItems = products.find((item: Product) => {
+  const shopptingCartItems = props.Products.find((item: Product) => {
     return item.id === props.ShoppingCartItems.items.productId;
   });
 
