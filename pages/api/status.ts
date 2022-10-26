@@ -18,7 +18,7 @@ const handler = async (req: NextApiRequest,
 
 
   return (
-    res.status(200).json({ name: "Some" })
+    res.status(200).json({ name: "Status OK!" })
   )
 }
 
