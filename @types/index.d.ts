@@ -32,18 +32,20 @@ type ShoppingCart = {
 };
 
 type ShoppingCartItems = {
-    quantity: number;
-    productId: string;
+    items: {
+        quantity: number;
+        productId: number;
+    }
+
 }
 
-type ShoppingCartMap = [ShoppingCart]
-
 type ShopCartPage = {
-    getAllShoppingCartItems: ShoppingCartMap;
-    getProducts: { id: number; image: string; title: string; price: number };
+    getAllShoppingCartItems: [ShoppingCartItems];
+    getProducts: [{ id: number; image: string; title: string; price: number }];
 };
 
+
 type ShoppingCartProps = {
-    ShoppingCartItems: ShoppingCart;
-    Products: { id: number; image: string; title: string; price: number };
+    ShoppingCartItems: ShoppingCartItems;
+    Products: [{ id: number; image: string; title: string; price: number }];
 };

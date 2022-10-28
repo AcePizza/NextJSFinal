@@ -6,7 +6,7 @@ import React from "react";
 import MongoCard from "../components/MongoCard";
 
 export const getServerSideProps = async (props: Props) => {
-  const data = await fetch("http://localhost:3000/api/hello");
+  const data = await fetch("http://localhost:3000/api/status");
   const res = await data.json();
 
   return { props: { res } };

@@ -38,18 +38,13 @@ export const getServerSideProps = async (props: ShopCartPage) => {
 
 const shoppingcart = (props: ShopCartPage) => {
   const getPrice = () => {
-    const arr2 = props.getAllShoppingCartItems.map(
+    const arr = props.getAllShoppingCartItems.map(
       (element) => element.items.productId
     );
-    const filter2 = props.getProducts.filter((element: Product) =>
-      arr2.includes(element.id)
-    );
-    const price = filter2
-      .map((element: Product) => {
-        return element.price;
-      })
+    return props.getProducts
+      .filter((element) => arr.includes(element.id))
+      .map((element) => element.price)
       .reduce((a: number, b: number) => a + b, 0);
-    return price;
   };
 
   return (
@@ -61,18 +56,16 @@ const shoppingcart = (props: ShopCartPage) => {
           </div>
 
           {props.getAllShoppingCartItems &&
-            props.getAllShoppingCartItems.map(
-              (item: ShoppingCart, index: number) => {
-                return (
-                  <React.Fragment key={index}>
-                    <ShoppingCard
-                      ShoppingCartItems={item}
-                      Products={props.getProducts}
-                    />
-                  </React.Fragment>
-                );
-              }
-            )}
+            props.getAllShoppingCartItems.map((item, index: number) => {
+              return (
+                <React.Fragment key={index}>
+                  <ShoppingCard
+                    ShoppingCartItems={item}
+                    Products={props.getProducts}
+                  />
+                </React.Fragment>
+              );
+            })}
 
           <div className="card mb-4">
             <div className="card-body p-4 d-flex flex-row">
