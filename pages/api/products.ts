@@ -1,6 +1,6 @@
 import clientPromise from "../../lib/mongodb";
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { Product } from "../../@types";
+import { Product, Products } from "../../@types";
 
 
 export default async (req: NextApiRequest,
