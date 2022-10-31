@@ -18,7 +18,6 @@ type StatusAlert = {
 };
 
 const mongodb = (props: Props) => {
-  console.log("props :>> ", props);
   const statusAlert = <Status, Text>(status?: Status, text?: Text) => {
     switch (status) {
       case "success":
