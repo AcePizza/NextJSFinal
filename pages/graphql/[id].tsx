@@ -63,7 +63,11 @@ export const getServerSideProps = async (params: Params) => {
 };
 
 const Details = (props: Product) => {
-  // console.log("props :>> ", props);
+  const randomPrice = (min: number, max: number) => {
+    return 10;
+    return Math.floor(Math.random() * (max - min)) + min;
+  };
+
   return (
     <div className="container">
       <h3>Here is the details page</h3>
@@ -98,7 +102,7 @@ const Details = (props: Product) => {
               <div className="align-items-center align-content-center col-md-3 border-left mt-1">
                 <div className="d-flex flex-row align-items-center">
                   <h4 className="mr-1">{props.price}</h4>
-                  <span className="strike-text">$100</span>
+                  <span className="strike-text">${randomPrice(100, 5)}</span>
                 </div>
                 <h6 className="text-success">Free shipping</h6>
                 <div className="d-flex flex-column mt-4">
