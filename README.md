@@ -2,7 +2,7 @@
 
 ## About
 
-This project is a simple intergration of GraphQL into NEXTjs. 
+This project is a intergration of GraphQL into NEXTjs. 
 
 #### It has just a simple front-end:
 
@@ -22,9 +22,8 @@ This project is a simple intergration of GraphQL into NEXTjs.
 
 ### Technology used:
 
-  - [NEXTjs]()
-  - [Apollo]()
-  - [GraphQL]()
-  - []()
-  - []()
-  - []()
+  - [NEXTjs](https://nextjs.org/)
+  - [Apollo GraphQL](https://www.apollographql.com/)
+  - [GraphQL](https://graphql.org/)
+  - [MongoDB Node.js](https://mongodb.github.io/node-mongodb-native/index.html)
+
